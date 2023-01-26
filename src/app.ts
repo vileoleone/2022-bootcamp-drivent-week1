@@ -7,6 +7,7 @@ import { loadEnv, connectDb, disconnectDB } from "@/config";
 
 loadEnv();
 
+
 import { handleApplicationErrors } from "@/middlewares";
 import { usersRouter, authenticationRouter, eventsRouter, enrollmentsRouter } from "@/routers";
 
