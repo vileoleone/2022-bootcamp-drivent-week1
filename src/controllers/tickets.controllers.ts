@@ -1,6 +1,6 @@
 import { AuthenticatedRequest } from "@/middlewares";
 import ticketService from "@/services/tickets-services";
-import { Request, Response } from "express";
+import { Response } from "express";
 import httpStatus from "http-status";
 
 export async function getTypeOfTicket(req: AuthenticatedRequest, res: Response) {
@@ -30,7 +30,7 @@ export async function createNewTicket(req: AuthenticatedRequest, res: Response) 
       userId: req.userId
     });
     
-    return res.status(httpStatus.CREATED).send(ticket);
+    return res.status(201).send(ticket);
   } catch (error) {
     if (error.name === "NotFoundError") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
