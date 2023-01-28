@@ -37,10 +37,34 @@ async function createATicket(NewTicketToCreate: TicketToCreate) {
   });
 }
 
+async function getATicket(id: number) {
+  return prisma.ticket.findFirst({
+    where: {
+      id: id
+    }
+  });
+}
+
+async function updateTicketAfterPayment(ticketId: number) {
+  return prisma.ticket.update({
+    where: {
+      id: ticketId,
+    },
+    data: {
+      status: TicketStatus.PAID,
+    },
+    include: {
+      TicketType: true
+    },
+  });
+}
+
 const ticketRepository = {
   getTicketByType,
   getAllTickets,
-  createATicket
+  createATicket, 
+  getATicket,
+  updateTicketAfterPayment
 };
 
 export type TicketToCreate = {
